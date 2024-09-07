@@ -5,7 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author jyepez on 7/9/2024
@@ -16,7 +17,10 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class ItemVo {
 
+    @NotEmpty(message = "Item code is required")
     private String itemCode;
+    @NotEmpty(message = "Name is required")
     private String name;
+    @NotNull(message = "Unit price is required")
     private double unitPrice;
 }

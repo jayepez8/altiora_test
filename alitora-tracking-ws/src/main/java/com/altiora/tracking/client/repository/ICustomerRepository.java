@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ICustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
     /**
-     * Exists By Identification
+     * Exists Customer By Identification
      *
      * @param identification String
      * @return Boolean
@@ -21,7 +21,7 @@ public interface ICustomerRepository extends JpaRepository<CustomerEntity, Long>
     Boolean existsByIdentification(String identification);
 
     /**
-     * Find By Identification
+     * Find Customer By Identification
      *
      * @param identification String
      * @return Optional CustomerEntity
