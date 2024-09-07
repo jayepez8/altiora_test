@@ -4,6 +4,7 @@ USE altiora_test;
 
 CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    identification VARCHAR(10) NOT NULL UNIQUE,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL
 );
@@ -33,10 +34,14 @@ CREATE TABLE order_items (
 );
 
 INSERT INTO
-    customers (first_name, last_name)
-VALUES ('John', 'Doe'),
-    ('Jane', 'Smith'),
-    ('Robert', 'Johnson');
+    customers (
+        identification,
+        first_name,
+        last_name
+    )
+VALUES ('1234567890', 'John', 'Doe'),
+    ('1234567891', 'Smith'),
+    ('1234567892', 'Johnson');
 
 INSERT INTO
     items (item_code, name, unit_price)

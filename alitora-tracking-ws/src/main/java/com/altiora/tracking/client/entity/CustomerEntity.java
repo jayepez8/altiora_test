@@ -22,6 +22,9 @@ public class CustomerEntity {
     @Column(name = "ID", updatable = false)
     private Long id;
 
+    @Column(name = "IDENTIFICATION",nullable = false, unique = true)
+    private String identification;
+
     @Column(name = "FIRST_NAME",nullable = false)
     private String firstName;
 
