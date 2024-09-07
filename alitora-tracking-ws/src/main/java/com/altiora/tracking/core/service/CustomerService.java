@@ -49,7 +49,7 @@ public class CustomerService implements ICustomerService {
     @Override
     public CustomerVo findByIdentification(String identification) {
         CustomerEntity customer = this.customerRepository.findByIdentification(identification)
-                .orElseThrow(() -> new NotFoundException("No client found with the identification " + identification));
+                .orElseThrow(() -> new NotFoundException("No customer found with the identification " + identification));
         return this.customerMapper.toCustomerVo(customer);
     }
 
