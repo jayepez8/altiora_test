@@ -3,5 +3,10 @@ import { HomeComponent } from "./home/home.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent ,children: [
+      {
+        path: 'customer',
+        loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule)
+      },
+    ]},
 ];

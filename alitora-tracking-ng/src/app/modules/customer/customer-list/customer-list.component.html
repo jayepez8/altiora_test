@@ -1,0 +1,32 @@
+<p-card>
+  <p-table [value]="customers"
+           [paginator]="customers && customers.length > 5"
+           [rows]="5"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        List customers
+        <p-button icon="pi pi-plus" label="New" />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Identification</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+      <tr>
+        <td>{{customer.identification}}</td>
+        <td>{{customer.firstName}}</td>
+        <td>{{customer.lastName}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{customers ? customers.length : 0 }} customers.
+      </div>
+    </ng-template>
+  </p-table>
+</p-card>
