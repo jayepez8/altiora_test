@@ -7,6 +7,8 @@ import { CommonModule } from "@angular/common";
 import { Button } from "primeng/button";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { CustomerAddEditComponent } from "../customer-add-edit/customer-add-edit.component";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService } from "primeng/api";
 
 @Component({
   selector: 'app-customer-list',
@@ -15,9 +17,10 @@ import { CustomerAddEditComponent } from "../customer-add-edit/customer-add-edit
     CommonModule,
     CardModule,
     TableModule,
-    Button
+    Button,
+    ConfirmDialogModule
   ],
-  providers: [DialogService],
+  providers: [DialogService,ConfirmationService],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
@@ -28,7 +31,8 @@ export class CustomerListComponent implements OnInit, OnDestroy{
 
   constructor(
     public dialogService: DialogService,
-    private customerService:CustomerService
+    private customerService:CustomerService,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -54,6 +58,36 @@ export class CustomerListComponent implements OnInit, OnDestroy{
       if(customer){
         this.getAll();
       }
+    });
+  }
+
+  openModalEdit(customer: Customer) {
+    this.ref = this.dialogService.open(CustomerAddEditComponent, {header: 'Edit customer',data:customer});
+    this.ref.onClose.subscribe((customer:Customer)=>{
+      if(customer){
+        this.getAll();
+      }
+    });
+  }
+
+  deleteCustomer(customer: Customer) {
+    this.confirmationService.confirm({
+      message: `Do you want to delete client ${customer.identification}?`,
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+
+      accept: () => {
+        this.customerService.delete(customer.identification).subscribe({
+          complete:(()=>{
+            this.getAll();
+            //this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Customer deleted' });
+          })
+        })
+      },
     });
   }
 }

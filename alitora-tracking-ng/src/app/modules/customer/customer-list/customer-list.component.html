@@ -14,6 +14,7 @@
         <th>Identification</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th style="text-align: center; width: 150px"><i class="pi pi-cog"></i></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-customer>
@@ -21,6 +22,10 @@
         <td>{{customer.identification}}</td>
         <td>{{customer.firstName}}</td>
         <td>{{customer.lastName}}</td>
+        <td style="text-align: center" class="flex align-items-center justify-content-between">
+          <p-button icon="pi pi-pencil" size="small" [rounded]="true" [outlined]="true" (click)="openModalEdit(customer)"/>
+          <p-button icon="pi pi-times" size="small" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteCustomer(customer)" />
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
@@ -30,3 +35,4 @@
     </ng-template>
   </p-table>
 </p-card>
+<p-confirmDialog />

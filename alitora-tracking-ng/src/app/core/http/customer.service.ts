@@ -20,11 +20,15 @@ export class CustomerService {
     return this.http.get(this.customerController);
   }
 
-  create(customer:Customer):Observable<Customer[] | Object>{
-    return this.http.post(this.customerController,customer);
+  create(customer:Customer):Observable<Customer>{
+    return this.http.post<Customer>(this.customerController,customer);
   }
 
-  getByIdentification(identification:string):Observable<Customer | Object>{
-    return this.http.get(this.customerController+'/'+identification);
+  update(customer:Customer):Observable<Customer>{
+    return this.http.put<Customer>(this.customerController,customer);
+  }
+
+  delete(identification:string):Observable<void>{
+    return this.http.delete<void>(this.customerController+'?identification='+identification);
   }
 }

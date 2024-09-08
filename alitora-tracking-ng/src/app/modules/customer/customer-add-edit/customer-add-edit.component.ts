@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Button } from "primeng/button";
-import { DynamicDialogRef } from "primeng/dynamicdialog";
+import { DialogService, DynamicDialogComponent, DynamicDialogRef } from "primeng/dynamicdialog";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Customer } from "../../../shared/models/customer";
 import { CustomerService } from "../../../core/http/customer.service";
@@ -25,19 +25,27 @@ export class CustomerAddEditComponent implements OnInit{
     firstName:'',
     lastName:''
   };
+  isEdit:boolean=false;
+  instance: DynamicDialogComponent | undefined;
 
   constructor(
     private ref: DynamicDialogRef,
+    private dialogService: DialogService,
     private customerService:CustomerService
   ) {
+    this.instance = this.dialogService.getInstance(this.ref);
   }
 
   ngOnInit(): void {
-  this.form = new FormGroup({
-    identification: new FormControl(this.customer.identification, [Validators.required]),
-    firstName: new FormControl(this.customer.firstName, [Validators.required]),
-    lastName: new FormControl(this.customer.lastName, [Validators.required]),
-  });
+    if (this.instance && this.instance.data) {
+      this.customer = this.instance.data
+      this.isEdit=true;
+    }
+    this.form = new FormGroup({
+      identification: new FormControl({value:this.customer.identification,disabled: this.isEdit}, [Validators.required]),
+      firstName: new FormControl(this.customer.firstName, [Validators.required]),
+      lastName: new FormControl(this.customer.lastName, [Validators.required]),
+    });
   }
 
   get identification(){
@@ -55,8 +63,14 @@ export class CustomerAddEditComponent implements OnInit{
       return;
     }
     const body: Customer = {...this.form.getRawValue()};
-    this.customerService.create(body).subscribe({
-      next:(result=> this.ref.close(result))
-    });
+    if(this.isEdit){
+      this.customerService.update(body).subscribe({
+        next: (result => this.ref.close(result))
+      })
+    }else {
+      this.customerService.create(body).subscribe({
+        next: (result => this.ref.close(result))
+      });
+    }
   }
 }
