@@ -1,0 +1,145 @@
+<p-card>
+  <div class="grid">
+    <div class="col-2 flex flex-column gap-2">
+      <div class="flex flex-column gap-2">
+        <label for="orderCode">Order Code</label>
+        <input
+          pInputText
+          id="orderCode"
+          disabled
+        />
+      </div>
+      <div class="flex flex-column gap-2">
+        <label for="customer">Customer</label>
+        <p-dropdown
+          id="customer"
+          [options]="customers"
+          [(ngModel)]="customer"
+          optionLabel="identification"
+          [filter]="true"
+          filterBy="identification"
+          [showClear]="true"
+          styleClass="w-full"
+        />
+      </div>
+      <div *ngIf="customer" class="flex flex-column gap-2 mt-3">
+        <div class="grid">
+          <strong class="col">First Name</strong>
+          <label class="col">{{customer.firstName}}</label>
+        </div>
+        <div class="grid">
+          <strong class="col">Last Name</strong>
+          <label class="col">{{customer.lastName}}</label>
+        </div>
+      </div>
+    </div>
+    <p-divider layout="vertical"/>
+    <div class="col">
+      <p-table
+        #tableList
+        styleClass = "p-datatable-sm"
+        [value]="items"
+        dataKey="itemCode"
+        [paginator]="items && items.length > 10"
+        [rows]="10"
+        [globalFilterFields]="['itemCode', 'name', 'unitPrice']"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            List items
+            <p-iconField iconPosition="left" class="ml-auto">
+              <p-inputIcon>
+                <i class="pi pi-search"></i>
+              </p-inputIcon>
+              <input
+                pInputText
+                type="text"
+                (input)="applyGlobalFilter($event)"
+                placeholder="Search keyword" />
+            </p-iconField>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Item Code</th>
+            <th>Name</th>
+            <th>Unit Price</th>
+            <th style="text-align: center"><i class="pi pi-cog"></i></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.itemCode}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.unitPrice | currency}}</td>
+            <td style="text-align: center"><p-button icon="pi pi-plus" size="small" [rounded]="true" [outlined]="true" (click)="pushItem(item)"/></td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            In total there are {{items ? items.length : 0 }} items.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+    <p-divider layout="vertical"/>
+    <div class="col">
+      <p-table
+        #tableList
+        styleClass = "p-datatable-sm"
+        [value]="itemsSelected"
+        [paginator]="itemsSelected && itemsSelected.length > 10"
+        [rows]="10"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            List items selected
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Item</th>
+            <th>Unit Price</th>
+            <th style="text-align: center" ><i class="pi pi-cog"></i></th>
+            <th>Total item</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.itemCode}} - {{item.name}}</td>
+            <td>{{item.unitPrice | currency}}</td>
+            <td style="text-align: center">
+              <p-inputNumber
+                [(ngModel)]="item.amount"
+                [showButtons]="true"
+                styleClass="input-number"
+                buttonLayout="horizontal"
+                inputId="horizontal"
+                spinnerMode="horizontal"
+                decrementButtonClass="p-button-danger"
+                incrementButtonClass="p-button-success"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                [min]="0"
+                (onInput)="calculateTotal(item)"
+              />
+            </td>
+            <td>{{item.total | currency}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <tr>
+            <td colspan="3" class="text-right">Total Order</td>
+            <td>{{totalOrder | currency }}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            <p-button label="Limpiar" (click)="clearSelected()"/>
+            <p-button label="Guardar"/>
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</p-card>

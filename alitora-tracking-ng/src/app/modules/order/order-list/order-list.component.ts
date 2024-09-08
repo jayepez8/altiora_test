@@ -5,6 +5,7 @@ import { Button } from "primeng/button";
 import { OrderService } from "../../../core/http/order.service";
 import { Order } from "../../../shared/models/order";
 import { CommonModule } from "@angular/common";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-order-list',
@@ -22,7 +23,11 @@ export class OrderListComponent implements OnInit{
 
   orders: Order[] | any = [];
 
-  constructor(private orderService:OrderService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private orderService:OrderService
+  ) {
   }
 
   ngOnInit(): void {
@@ -35,8 +40,8 @@ export class OrderListComponent implements OnInit{
     })
   }
 
-  openModalCreate() {
-
+  redirectOrderAdd() {
+    this.router.navigate(['/home/order/add'],{relativeTo:this.route})
   }
 
   showDetails(orderCode: string) {

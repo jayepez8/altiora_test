@@ -23,4 +23,8 @@ export class CustomerService {
   create(customer:Customer):Observable<Customer[] | Object>{
     return this.http.post(this.customerController,customer);
   }
+
+  getByIdentification(identification:string):Observable<Customer | Object>{
+    return this.http.get(this.customerController+'/'+identification);
+  }
 }
