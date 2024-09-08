@@ -1,0 +1,56 @@
+<p-table [paginator]="items && items.length > 5"
+         [rows]="5"
+         [value]="items"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      <p-fieldset class="flex-grow-1" legend="Order">
+        <div class="grid">
+          <strong class="col">Code:</strong>
+          <label class="col">{{order.orderCode}}</label>
+        </div>
+        <div class="grid">
+          <strong class="col">Date:</strong>
+          <label class="col">{{order.orderDate | date: 'dd/MM/yyyy'}}</label>
+        </div>
+      </p-fieldset>
+      <p-fieldset *ngIf="order.customer" class="flex-grow-1" legend="Customer">
+        <div class="grid">
+          <strong class="col">Identification:</strong>
+          <label class="col">{{order.customer.identification}}</label>
+        </div>
+        <div class="grid">
+          <strong class="col">Name:</strong>
+          <label class="col">{{order.customer.firstName}} {{order.customer.lastName}}</label>
+        </div>
+      </p-fieldset>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Item</th>
+      <th>UnitPrice</th>
+      <th>Quantity</th>
+      <th>Total item</th>
+    </tr>
+  </ng-template>
+  <ng-template let-order pTemplate="body">
+    <tr>
+      <td>{{order.itemCode}} {{order.name}}</td>
+      <td>{{order.unitPrice}}</td>
+      <td>{{order.quantity}}</td>
+      <td>{{order.totalPrice}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <tr>
+      <td class="text-right" colspan="3">Total Order</td>
+      <td>{{order.totalOrder | currency }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+      In total there are {{items ? items.length : 0 }} items.
+    </div>
+  </ng-template>
+</p-table>

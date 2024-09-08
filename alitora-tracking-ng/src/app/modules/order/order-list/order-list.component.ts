@@ -6,6 +6,8 @@ import { OrderService } from "../../../core/http/order.service";
 import { Order } from "../../../shared/models/order";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
+import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
+import { OrderDetailsComponent } from "../order-details/order-details.component";
 
 @Component({
   selector: 'app-order-list',
@@ -16,17 +18,20 @@ import { ActivatedRoute, Router } from "@angular/router";
     TableModule,
     Button
   ],
+  providers: [DialogService],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss'
 })
 export class OrderListComponent implements OnInit{
 
   orders: Order[] | any = [];
+  ref: DynamicDialogRef | undefined;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private orderService:OrderService
+    private orderService: OrderService,
+    public dialogService: DialogService,
   ) {
   }
 
@@ -45,6 +50,14 @@ export class OrderListComponent implements OnInit{
   }
 
   showDetails(orderCode: string) {
-
+    this.orderService.findByOrderCode(orderCode).subscribe({
+      next: (order => {
+        this.ref = this.dialogService.open(OrderDetailsComponent, {
+          header: 'Details order ' + orderCode,
+          data: order,
+          width: '80vw',
+        },);
+      })
+    })
   }
 }

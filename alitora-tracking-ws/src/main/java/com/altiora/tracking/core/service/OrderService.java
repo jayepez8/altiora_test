@@ -85,6 +85,7 @@ public class OrderService implements IOrderService {
     public OrderVo findByOrderCode(String orderCode) {
         OrderEntity order = this.orderRepository.findByOrderCode(orderCode)
                 .orElseThrow(() -> new NotFoundException("No order found with the order code " + orderCode));
+
         return this.orderMapper.toOrderVo(order);
     }
 

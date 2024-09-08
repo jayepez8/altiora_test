@@ -25,4 +25,7 @@ public class OrderItemVo {
     private int quantity;
     @NotNull(message = "Total price is required")
     private double totalPrice;
+
+    private String name;
+    private double unitPrice;
 }
