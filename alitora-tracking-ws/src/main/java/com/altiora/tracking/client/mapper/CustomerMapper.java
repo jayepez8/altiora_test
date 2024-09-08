@@ -3,6 +3,7 @@ package com.altiora.tracking.client.mapper;
 import com.altiora.tracking.client.entity.CustomerEntity;
 import com.altiora.tracking.vo.CustomerVo;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.Collection;
 
@@ -35,4 +36,12 @@ public interface CustomerMapper {
      * @return Collection CustomerVo
      */
     Collection<CustomerVo> toCollectionCustomerVo(Collection<CustomerEntity> customers);
+
+    /**
+     * Update Customer From Vo
+     *
+     * @param customerVo CustomerVo
+     * @param customer CustomerEntity
+     */
+    void updateCustomerFromVo(CustomerVo customerVo, @MappingTarget CustomerEntity customer);
 }

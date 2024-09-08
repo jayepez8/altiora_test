@@ -63,7 +63,6 @@ public class OrderService implements IOrderService {
             OrderEntity orderSave = this.orderRepository.save(order);
 
             Collection<OrderItemEntity> orderItems = new ArrayList<>();
-
             for(OrderItemVo orderItemVo : orderVo.getOrderItems()){
                 OrderItemEntity orderItem = this.orderItemMapper.toOrderItem(orderItemVo);
                 orderItem.setOrder(orderSave);
@@ -85,7 +84,6 @@ public class OrderService implements IOrderService {
     public OrderVo findByOrderCode(String orderCode) {
         OrderEntity order = this.orderRepository.findByOrderCode(orderCode)
                 .orElseThrow(() -> new NotFoundException("No order found with the order code " + orderCode));
-
         return this.orderMapper.toOrderVo(order);
     }
 

@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.Collection;
 
 import static com.altiora.tracking.client.common.TrackingConstants.V1_API_VERSION;
@@ -55,5 +54,28 @@ public class CustomerController {
     public ResponseEntity<CustomerVo> findByIdentification(@PathVariable("id") String identification){
         CustomerVo response = this.customerService.findByIdentification(identification);
         return ResponseEntity.ok().body(response);
+    }
+
+    /**
+     * Update Customer
+     *
+     * @param customerVo CustomerVo
+     * @return CustomerVo
+     */
+    @PutMapping()
+    public ResponseEntity<CustomerVo> update(@RequestBody @Valid CustomerVo customerVo){
+        CustomerVo response =this.customerService.update(customerVo);
+        return ResponseEntity.ok().body(response);
+    }
+
+    /**
+     * Delete Customer By Identification
+     *
+     * @param identification String
+     */
+    @DeleteMapping()
+    public ResponseEntity<?> delete(@RequestParam @Valid String identification){
+        this.customerService.deleteByIdentification(identification);
+        return ResponseEntity.ok().build();
     }
 }

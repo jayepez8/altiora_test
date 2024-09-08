@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
@@ -47,9 +48,40 @@ public class CustomerService implements ICustomerService {
      * {@inheritDoc}
      */
     @Override
+    public CustomerVo update(CustomerVo customerVo) {
+        CustomerEntity findCustomer = findCustomerByIdentification(customerVo.getIdentification());
+        try {
+            this.customerMapper.updateCustomerFromVo(customerVo,findCustomer);
+            CustomerEntity customer = this.customerRepository.save(findCustomer);
+            customer.setUpdateDate(LocalDateTime.now());
+            return this.customerMapper.toCustomerVo(customer);
+        }catch (Exception e){
+            throw new PersistException("A problem occurred, the costumer could not be updated");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public CustomerVo findByIdentification(String identification) {
         CustomerEntity customer = findCustomerByIdentification(identification);
         return this.customerMapper.toCustomerVo(customer);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteByIdentification(String identification) {
+        CustomerEntity customer = findCustomerByIdentification(identification);
+        try {
+            customer.setStatus(Boolean.FALSE);
+            customer.setUpdateDate(LocalDateTime.now());
+            this.customerRepository.save(customer);
+        }catch (Exception e){
+            throw new PersistException("A problem occurred, the client could not be deleted");
+        }
     }
 
     /**

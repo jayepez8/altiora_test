@@ -19,12 +19,27 @@ public interface ICustomerService {
     CustomerVo create(CustomerVo customerVo);
 
     /**
+     * Update Customer
+     *
+     * @param customerVo CustomerVo
+     * @return CustomerVo
+     */
+    CustomerVo update(CustomerVo customerVo);
+
+    /**
      * Find Customer By Identification
      *
      * @param identification String
      * @return CustomerVo
      */
     CustomerVo findByIdentification(String identification);
+
+    /**
+     * Delete Customer By Identification
+     *
+     * @param identification String
+     */
+    void deleteByIdentification(String identification);
 
     /**
      * Find All Customers

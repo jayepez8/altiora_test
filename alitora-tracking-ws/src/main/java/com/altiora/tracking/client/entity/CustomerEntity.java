@@ -36,11 +36,18 @@ public class CustomerEntity {
     @Column(name = "CREATE_DATE",nullable = false)
     private LocalDateTime createDate;
 
+    @Column(name = "UPDATE_DATE")
+    private LocalDateTime updateDate;
+
+    @Column(name = "STATUS")
+    private Boolean status;
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orders;
 
     @PrePersist
     public void prePersist() {
         this.createDate = LocalDateTime.now();
+        this.status = Boolean.TRUE;
     }
 }
