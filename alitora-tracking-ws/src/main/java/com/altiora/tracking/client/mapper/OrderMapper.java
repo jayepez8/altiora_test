@@ -11,10 +11,13 @@ import java.util.Collection;
  * @author jyepez on 8/9/2024
  */
 @Mapper(componentModel = "spring", uses = {
-        CustomerMapper.class
+        CustomerMapper.class,
+        ItemMapper.class,
+        OrderItemMapper.class
 })
 public interface OrderMapper {
 
+    @Mapping(target = "orderItems", source = "orderItems")
     OrderVo toOrderVo(OrderEntity order);
 
     Collection<OrderVo> toCollectionOrderVo(Collection<OrderEntity> orders);
