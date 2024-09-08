@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +33,14 @@ public class CustomerEntity {
     @Column(name = "LAST_NAME",nullable = false)
     private String lastName;
 
+    @Column(name = "CREATE_DATE",nullable = false)
+    private LocalDateTime createDate;
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orders;
+
+    @PrePersist
+    public void prePersist() {
+        this.createDate = LocalDateTime.now();
+    }
 }

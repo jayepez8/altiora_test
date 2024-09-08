@@ -57,7 +57,7 @@ public class CustomerService implements ICustomerService {
      */
     @Override
     public Collection<CustomerVo> findAll() {
-        Collection<CustomerEntity> customers = this.customerRepository.findAll();
+        Collection<CustomerEntity> customers = this.customerRepository.findAllByOrderByCreateDateDesc();
         return this.customerMapper.toCollectionCustomerVo(customers);
     }
 

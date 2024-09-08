@@ -65,7 +65,7 @@ public class OrderService implements IOrderService {
      */
     @Override
     public Collection<OrderVo> findAll() {
-        Collection<OrderEntity> orders = this.orderRepository.findAll();
+        Collection<OrderEntity> orders = this.orderRepository.findAllByOrderByOrderDateDesc();
         return this.orderMapper.toCollectionOrderVo(orders);
     }
 }

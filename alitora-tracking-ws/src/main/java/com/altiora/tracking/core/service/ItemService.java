@@ -58,7 +58,7 @@ public class ItemService implements IItemService {
      */
     @Override
     public Collection<ItemVo> findAll() {
-        Collection<ItemEntity> items = this.itemRepository.findAll();
+        Collection<ItemEntity> items = this.itemRepository.findAllByOrderByCreateDateDesc();
         return this.itemMapper.toCollectionItemVo(items);
     }
 }

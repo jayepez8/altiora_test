@@ -4,6 +4,7 @@ import com.altiora.tracking.client.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -27,4 +28,11 @@ public interface IOrderRepository extends JpaRepository<OrderEntity, Long> {
      * @return Optional OrderEntity
      */
     Optional<OrderEntity> findByOrderCode(String orderCode);
+
+    /**
+     * Find All Order By OrderDate Desc
+     *
+     * @return Collection OrderEntity
+     */
+    Collection<OrderEntity> findAllByOrderByOrderDateDesc();
 }

@@ -4,6 +4,7 @@ import com.altiora.tracking.client.entity.ItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -27,4 +28,11 @@ public interface IItemRepository extends JpaRepository<ItemEntity, Long> {
      * @return Optional ItemEntity
      */
     Optional<ItemEntity> findByItemCode(String itemCode);
+
+    /**
+     * Find All Items Order By CreateDate Desc
+     *
+     * @return Collection ItemEntity
+     */
+    Collection<ItemEntity> findAllByOrderByCreateDateDesc();
 }

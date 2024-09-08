@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,7 +28,10 @@ public class OrderEntity {
     private String orderCode;
 
     @Column(name = "ORDER_DATE", nullable = false)
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
+
+    @Column(name = "TOTAL_ORDER", nullable = false)
+    private double totalOrder;
 
     @ManyToOne
     @JoinColumn(name = "CUSTOMER_ID", nullable = false)
@@ -35,4 +39,9 @@ public class OrderEntity {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItemEntity> orderItems;
+
+    @PrePersist
+    public void prePersist() {
+        this.orderDate = LocalDateTime.now();
+    }
 }

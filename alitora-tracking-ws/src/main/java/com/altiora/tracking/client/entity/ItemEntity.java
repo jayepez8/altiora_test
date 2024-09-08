@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author jyepez on 7/9/2024
@@ -29,4 +30,12 @@ public class ItemEntity {
 
     @Column(name = "UNIT_PRICE", nullable = false)
     private double unitPrice;
+
+    @Column(name = "CREATE_DATE",nullable = false)
+    private LocalDateTime createDate;
+
+    @PrePersist
+    public void prePersist() {
+        this.createDate = LocalDateTime.now();
+    }
 }
