@@ -8,6 +8,7 @@ export const constants = {
         CONTROLLERS: {
           CUSTOMER: 'customer',
           ITEM: 'item',
+          ORDER: 'order',
         }
       }
     }

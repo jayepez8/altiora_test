@@ -52,7 +52,7 @@ public class ItemController {
      * @return ItemVo
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ItemVo> findByIdentification(@PathVariable("id") String itemCode){
+    public ResponseEntity<ItemVo> findByItemCode(@PathVariable("id") String itemCode){
         ItemVo response = this.itemService.findByItemCode(itemCode);
         return ResponseEntity.ok().body(response);
     }

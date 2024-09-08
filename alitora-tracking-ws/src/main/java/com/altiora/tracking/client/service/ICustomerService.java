@@ -1,5 +1,6 @@
 package com.altiora.tracking.client.service;
 
+import com.altiora.tracking.client.entity.CustomerEntity;
 import com.altiora.tracking.vo.CustomerVo;
 
 import java.util.Collection;
@@ -31,4 +32,12 @@ public interface ICustomerService {
      * @return Collection CustomerVo
      */
     Collection<CustomerVo> findAll();
+
+    /**
+     * Find Customer By Identification
+     *
+     * @param identification String
+     * @return CustomerEntity
+     */
+    CustomerEntity findCustomerByIdentification(String identification);
 }

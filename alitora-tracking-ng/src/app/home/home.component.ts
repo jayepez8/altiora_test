@@ -41,6 +41,9 @@ export class HomeComponent {
     {
       label: 'Orders',
       icon: 'pi pi-search',
+      command: () => {
+        this.router.navigate(['home/order']).finally();
+      }
     }
   ];
 

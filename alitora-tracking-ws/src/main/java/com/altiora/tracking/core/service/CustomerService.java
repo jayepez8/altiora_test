@@ -48,8 +48,7 @@ public class CustomerService implements ICustomerService {
      */
     @Override
     public CustomerVo findByIdentification(String identification) {
-        CustomerEntity customer = this.customerRepository.findByIdentification(identification)
-                .orElseThrow(() -> new NotFoundException("No customer found with the identification " + identification));
+        CustomerEntity customer = findCustomerByIdentification(identification);
         return this.customerMapper.toCustomerVo(customer);
     }
 
@@ -60,5 +59,14 @@ public class CustomerService implements ICustomerService {
     public Collection<CustomerVo> findAll() {
         Collection<CustomerEntity> customers = this.customerRepository.findAll();
         return this.customerMapper.toCollectionCustomerVo(customers);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CustomerEntity findCustomerByIdentification(String identification) {
+        return this.customerRepository.findByIdentification(identification)
+                .orElseThrow(() -> new NotFoundException("No customer found with the identification " + identification));
     }
 }

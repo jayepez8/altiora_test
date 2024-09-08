@@ -12,5 +12,9 @@ export const routes: Routes = [
         path: 'item',
         loadChildren: () => import('./modules/item/item.module').then(m => m.ItemModule)
       },
+      {
+        path: 'order',
+        loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule)
+      },
     ]},
 ];
