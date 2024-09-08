@@ -1,0 +1,30 @@
+<form (ngSubmit)="saveItem()" [formGroup]="form" class="flex flex-column gap-2">
+  <div class="flex flex-column gap-2">
+    <label for="itemCode">Item Code*</label>
+    <input
+      formControlName="itemCode"
+      id="itemCode"
+      pInputText
+    />
+  </div>
+  <div class="flex flex-column gap-2">
+    <label for="name">Name*</label>
+    <input
+      formControlName="name"
+      id="name"
+      pInputText
+    />
+  </div>
+  <div class="flex flex-column gap-2">
+    <label for="unitPrice">Unit Price*</label>
+    <p-inputNumber
+      currency="USD"
+      formControlName="unitPrice"
+      id="unitPrice"
+      [min]="0"
+      inputId="unitPrice"
+      locale="en-US"
+      mode="currency"/>
+  </div>
+  <p-button [disabled]="form.invalid" class="align-self-center" label="Submit" type="submit"/>
+</form>

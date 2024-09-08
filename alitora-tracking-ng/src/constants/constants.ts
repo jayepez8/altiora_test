@@ -7,6 +7,7 @@ export const constants = {
         PATH: '/api/v1',
         CONTROLLERS: {
           CUSTOMER: 'customer',
+          ITEM: 'item',
         }
       }
     }

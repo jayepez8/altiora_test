@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ChipsModule } from "primeng/chips";
 import { Button } from "primeng/button";
 import { DynamicDialogRef } from "primeng/dynamicdialog";
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Customer } from "../../../shared/models/customer";
 import { CustomerService } from "../../../core/http/customer.service";
+import { InputTextModule } from "primeng/inputtext";
 
 @Component({
   selector: 'app-customer-add-edit',
   standalone: true,
   imports: [
-    ChipsModule,
+    InputTextModule,
     Button,
     ReactiveFormsModule
   ],

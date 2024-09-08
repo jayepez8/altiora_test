@@ -33,7 +33,10 @@ export class HomeComponent {
     },
     {
       label: 'Items',
-      icon: 'pi pi-star'
+      icon: 'pi pi-star',
+      command: () => {
+        this.router.navigate(['home/item']).finally();
+      }
     },
     {
       label: 'Orders',

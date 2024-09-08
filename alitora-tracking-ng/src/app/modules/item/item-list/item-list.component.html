@@ -1,0 +1,32 @@
+<p-card>
+  <p-table [value]="items"
+           [paginator]="items && items.length > 5"
+           [rows]="5"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        List items
+        <p-button icon="pi pi-plus" label="New" (click)="openModalCreate()" />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Item Code</th>
+        <th>Name</th>
+        <th>Unit Price</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{item.itemCode}}</td>
+        <td>{{item.name}}</td>
+        <td>$ {{item.unitPrice}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{items ? items.length : 0 }} items.
+      </div>
+    </ng-template>
+  </p-table>
+</p-card>

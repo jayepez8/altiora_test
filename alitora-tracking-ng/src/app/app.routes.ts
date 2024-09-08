@@ -8,5 +8,9 @@ export const routes: Routes = [
         path: 'customer',
         loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule)
       },
+      {
+        path: 'item',
+        loadChildren: () => import('./modules/item/item.module').then(m => m.ItemModule)
+      },
     ]},
 ];

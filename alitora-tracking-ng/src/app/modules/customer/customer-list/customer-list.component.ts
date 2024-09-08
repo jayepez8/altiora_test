@@ -7,7 +7,6 @@ import { CommonModule } from "@angular/common";
 import { Button } from "primeng/button";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { CustomerAddEditComponent } from "../customer-add-edit/customer-add-edit.component";
-import { MessageService } from "primeng/api";
 
 @Component({
   selector: 'app-customer-list',
@@ -18,14 +17,13 @@ import { MessageService } from "primeng/api";
     TableModule,
     Button
   ],
-  providers: [DialogService, MessageService],
+  providers: [DialogService],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
 export class CustomerListComponent implements OnInit, OnDestroy{
 
   customers: Customer[] | any = [];
-
   ref: DynamicDialogRef | undefined;
 
   constructor(
@@ -56,6 +54,6 @@ export class CustomerListComponent implements OnInit, OnDestroy{
       if(customer){
         this.getAll();
       }
-    })
+    });
   }
 }
