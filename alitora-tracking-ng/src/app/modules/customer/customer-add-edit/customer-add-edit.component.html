@@ -1,0 +1,27 @@
+<form (ngSubmit)="saveCustomer()" [formGroup]="form" class="flex flex-column gap-2">
+<div class="flex flex-column gap-2">
+  <label for="identification">Identification*</label>
+  <input
+    pInputText
+    id="identification"
+    formControlName="identification"
+    />
+</div>
+<div class="flex flex-column gap-2">
+  <label for="firstName">First Name*</label>
+  <input
+    pInputText
+    id="firstName"
+    formControlName="firstName"
+  />
+</div>
+<div class="flex flex-column gap-2">
+  <label for="lastName">Last Name*</label>
+  <input
+    pInputText
+    id="lastName"
+    formControlName="lastName"
+  />
+</div>
+<p-button label="Submit" class="align-self-center" type="submit" [disabled]="form.invalid" />
+</form>

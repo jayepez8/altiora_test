@@ -6,6 +6,7 @@ package com.altiora.tracking.client.common;
 public class TrackingConstants {
 
     public static final String V1_API_VERSION = "/api/v1";
+    public static final String LOCALHOST_URI = "http://localhost:4200";
 
     private TrackingConstants() {
 

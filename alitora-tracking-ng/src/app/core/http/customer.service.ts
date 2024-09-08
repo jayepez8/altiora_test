@@ -19,4 +19,8 @@ export class CustomerService {
   getAll():Observable<Customer[] | Object>{
     return this.http.get(this.customerController);
   }
+
+  create(customer:Customer):Observable<Customer[] | Object>{
+    return this.http.post(this.customerController,customer);
+  }
 }

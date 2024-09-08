@@ -1,4 +1,4 @@
-package com.altiora.tracking.client.common;
+package com.altiora.tracking.client.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
