@@ -34,5 +34,5 @@ public interface ICustomerRepository extends JpaRepository<CustomerEntity, Long>
      *
      * @return Collection CustomerEntity
      */
-    Collection<CustomerEntity> findAllByOrderByCreateDateDesc();
+    Collection<CustomerEntity> findAllByStatusIsTrueOrderByCreateDateDesc();
 }
