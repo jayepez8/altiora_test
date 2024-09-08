@@ -6,6 +6,7 @@
         <input
           pInputText
           id="orderCode"
+          [(ngModel)]="order.orderCode"
           disabled
         />
       </div>
@@ -20,6 +21,7 @@
           filterBy="identification"
           [showClear]="true"
           styleClass="w-full"
+          placeholder="Select a Customer"
         />
       </div>
       <div *ngIf="customer" class="flex flex-column gap-2 mt-3">
@@ -40,8 +42,8 @@
         styleClass = "p-datatable-sm"
         [value]="items"
         dataKey="itemCode"
-        [paginator]="items && items.length > 10"
-        [rows]="10"
+        [paginator]="items && items.length > 5"
+        [rows]="5"
         [globalFilterFields]="['itemCode', 'name', 'unitPrice']"
       >
         <ng-template pTemplate="caption">
@@ -85,11 +87,10 @@
     <p-divider layout="vertical"/>
     <div class="col">
       <p-table
-        #tableList
         styleClass = "p-datatable-sm"
         [value]="itemsSelected"
-        [paginator]="itemsSelected && itemsSelected.length > 10"
-        [rows]="10"
+        [paginator]="itemsSelected && itemsSelected.length > 5"
+        [rows]="5"
       >
         <ng-template pTemplate="caption">
           <div class="flex align-items-center justify-content-between">
@@ -130,13 +131,13 @@
         <ng-template pTemplate="footer">
           <tr>
             <td colspan="3" class="text-right">Total Order</td>
-            <td>{{totalOrder | currency }}</td>
+            <td>{{order.totalOrder | currency }}</td>
           </tr>
         </ng-template>
         <ng-template pTemplate="summary">
           <div class="flex align-items-center justify-content-between">
             <p-button label="Limpiar" (click)="clearSelected()"/>
-            <p-button label="Guardar"/>
+            <p-button label="Guardar" (click)="saveOrder()"/>
           </div>
         </ng-template>
       </p-table>

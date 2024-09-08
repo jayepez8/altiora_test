@@ -1,6 +1,8 @@
 package com.altiora.tracking.client.service;
 
+import com.altiora.tracking.client.entity.ItemEntity;
 import com.altiora.tracking.vo.ItemVo;
+import com.altiora.tracking.vo.NextCodeVo;
 
 import java.util.Collection;
 
@@ -31,4 +33,19 @@ public interface IItemService {
      * @return Collection ItemVo
      */
     Collection<ItemVo> findAll();
+
+    /**
+     * Get Next Item Code
+     *
+     * @return NextCodeVo
+     */
+    NextCodeVo getNextItemCode();
+
+    /**
+     * Find ItemEntity By ItemCode
+     *
+     * @param itemCode String
+     * @return ItemVo
+     */
+    ItemEntity findItemEntityByItemCode(String itemCode);
 }

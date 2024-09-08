@@ -1,5 +1,6 @@
 package com.altiora.tracking.client.service;
 
+import com.altiora.tracking.vo.NextCodeVo;
 import com.altiora.tracking.vo.OrderVo;
 
 import java.util.Collection;
@@ -31,4 +32,11 @@ public interface IOrderService {
      * @return Collection OrderVo
      */
     Collection<OrderVo> findAll();
+
+    /**
+     * Get Next Order Code
+     *
+     * @return NextCodeVo
+     */
+    NextCodeVo getNextOrderCode();
 }

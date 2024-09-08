@@ -19,5 +19,6 @@ public interface OrderMapper {
 
     Collection<OrderVo> toCollectionOrderVo(Collection<OrderEntity> orders);
 
+    @Mapping(target = "orderItems", ignore = true)
     OrderEntity toOrder(OrderVo orderVo);
 }

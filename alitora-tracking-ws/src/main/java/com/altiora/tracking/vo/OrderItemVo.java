@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.Date;
 
 /**
  * @author jyepez on 8/9/2024
@@ -17,15 +15,14 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderVo {
+public class OrderItemVo {
 
     @NotEmpty(message = "Order Code is required")
     private String orderCode;
-    @NotEmpty(message = "Identification is required")
-    private String identification;
-    @NotNull(message = "Total order is required")
-    private double totalOrder;
-    private Date orderDate;
-    private CustomerVo customer;
-    private Collection<OrderItemVo> orderItems;
+    @NotEmpty(message = "Item code is required")
+    private String itemCode;
+    @NotNull(message = "Quantity is required")
+    private int quantity;
+    @NotNull(message = "Total price is required")
+    private double totalPrice;
 }

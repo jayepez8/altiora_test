@@ -3,6 +3,7 @@ package com.altiora.tracking.controller;
 import com.altiora.tracking.client.service.IItemService;
 import com.altiora.tracking.vo.CustomerVo;
 import com.altiora.tracking.vo.ItemVo;
+import com.altiora.tracking.vo.NextCodeVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,17 @@ public class ItemController {
     @GetMapping("/{id}")
     public ResponseEntity<ItemVo> findByItemCode(@PathVariable("id") String itemCode){
         ItemVo response = this.itemService.findByItemCode(itemCode);
+        return ResponseEntity.ok().body(response);
+    }
+
+    /**
+     * Get Next Item Code
+     *
+     * @return String
+     */
+    @GetMapping("/getNextItemCode")
+    public ResponseEntity<NextCodeVo> getNextItemCode(){
+        NextCodeVo response = this.itemService.getNextItemCode();
         return ResponseEntity.ok().body(response);
     }
 }

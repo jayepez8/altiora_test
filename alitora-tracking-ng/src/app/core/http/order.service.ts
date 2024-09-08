@@ -4,6 +4,7 @@ import { constants } from "../../../constants/constants";
 import { Observable } from "rxjs";
 import { Customer } from "../../shared/models/customer";
 import { Order } from "../../shared/models/order";
+import { NextCode } from "../../shared/models/next-code";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,11 @@ export class OrderService {
     return this.http.get(this.orderController);
   }
 
-  create(order:Order):Observable<Order[] | Object>{
-    return this.http.post(this.orderController,order);
+  create(order:Order):Observable<Order[]>{
+    return this.http.post<Order[]>(this.orderController,order);
+  }
+
+  getNextOrderCode():Observable<NextCode> {
+    return this.http.get<NextCode>(this.orderController+"/getNextOrderCode");
   }
 }

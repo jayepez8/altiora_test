@@ -2,6 +2,7 @@ package com.altiora.tracking.controller;
 
 import com.altiora.tracking.client.service.IOrderService;
 import com.altiora.tracking.vo.CustomerVo;
+import com.altiora.tracking.vo.NextCodeVo;
 import com.altiora.tracking.vo.OrderVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +55,17 @@ public class OrderController {
     @GetMapping("/{id}")
     public ResponseEntity<OrderVo> findByOrderCode(@PathVariable("id") String orderCode){
         OrderVo response = this.orderService.findByOrderCode(orderCode);
+        return ResponseEntity.ok().body(response);
+    }
+
+    /**
+     * Get Next Order Code
+     *
+     * @return String
+     */
+    @GetMapping("/getNextOrderCode")
+    public ResponseEntity<NextCodeVo> getNextOrderCode(){
+        NextCodeVo response = this.orderService.getNextOrderCode();
         return ResponseEntity.ok().body(response);
     }
 }

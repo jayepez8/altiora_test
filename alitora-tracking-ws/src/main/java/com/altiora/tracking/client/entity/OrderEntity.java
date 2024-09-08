@@ -33,6 +33,9 @@ public class OrderEntity {
     @Column(name = "TOTAL_ORDER", nullable = false)
     private double totalOrder;
 
+    @Column(name = "CREATE_DATE",nullable = false)
+    private LocalDateTime createDate;
+
     @ManyToOne
     @JoinColumn(name = "CUSTOMER_ID", nullable = false)
     private CustomerEntity customer;
@@ -43,5 +46,6 @@ public class OrderEntity {
     @PrePersist
     public void prePersist() {
         this.orderDate = LocalDateTime.now();
+        this.createDate = LocalDateTime.now();
     }
 }

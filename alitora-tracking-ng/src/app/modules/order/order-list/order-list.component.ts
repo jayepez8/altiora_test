@@ -41,7 +41,7 @@ export class OrderListComponent implements OnInit{
   }
 
   redirectOrderAdd() {
-    this.router.navigate(['/home/order/add'],{relativeTo:this.route})
+    this.router.navigate(['/home/order/add'],{relativeTo:this.route}).finally()
   }
 
   showDetails(orderCode: string) {

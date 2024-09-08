@@ -7,15 +7,17 @@ import { ItemsService } from "../../../core/http/items.service";
 import { Customer } from "../../../shared/models/customer";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { ItemAddComponent } from "../item-add/item-add.component";
+import { CurrencyPipe } from "@angular/common";
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
-  imports: [
-    CardModule,
-    TableModule,
-    Button
-  ],
+    imports: [
+        CardModule,
+        TableModule,
+        Button,
+        CurrencyPipe
+    ],
   providers: [DialogService],
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.scss'
