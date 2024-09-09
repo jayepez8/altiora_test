@@ -13,15 +13,25 @@ services:
     volumes:
       - ./BaseDatos.sql:/docker-entrypoint-initdb.d/BaseDatos.sql
 
-  #altiora-ws:
-  #  build:
-  #    context: ./altioraWs
-  #  environment:
-  #    SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/altiora_test
-  #    SPRING_DATASOURCE_USERNAME: user
-  #    SPRING_DATASOURCE_PASSWORD: user_password
-  #  ports:
-  #    - "8081:8081"
-  #  depends_on:
-  #    - db
-  #  restart: always
+  altiora-ws:
+    build:
+      context: ./alitora-tracking-ws
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/altiora_test
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: user_password
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    restart: always
+
+  alitora-ng:
+    build:
+      context: ./alitora-tracking-ng
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    restart: always
+  
