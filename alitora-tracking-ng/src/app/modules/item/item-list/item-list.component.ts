@@ -8,6 +8,8 @@ import { Customer } from "../../../shared/models/customer";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { ItemAddComponent } from "../item-add/item-add.component";
 import { CurrencyPipe } from "@angular/common";
+import { ToastModule } from "primeng/toast";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: 'app-item-list',
@@ -16,9 +18,10 @@ import { CurrencyPipe } from "@angular/common";
         CardModule,
         TableModule,
         Button,
-        CurrencyPipe
+        CurrencyPipe,
+        ToastModule
     ],
-  providers: [DialogService],
+  providers: [DialogService,MessageService],
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.scss'
 })
@@ -28,8 +31,9 @@ export class ItemListComponent implements OnInit{
   ref: DynamicDialogRef | undefined;
 
   constructor(
+    private itemsService:ItemsService,
     public dialogService: DialogService,
-    private itemsService:ItemsService
+    private messageService: MessageService,
   ) {
   }
 
@@ -47,6 +51,7 @@ export class ItemListComponent implements OnInit{
     this.ref = this.dialogService.open(ItemAddComponent, {header: 'Create new item'});
     this.ref.onClose.subscribe((customer:Customer)=>{
       if(customer){
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Item created successfully' });
         this.getAll();
       }
     });

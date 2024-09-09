@@ -19,6 +19,8 @@ import { OrderService } from "../../../core/http/order.service";
 import { Order } from "../../../shared/models/order";
 import { OrderItem } from "../../../shared/models/order-item";
 import { ActivatedRoute, Router } from "@angular/router";
+import { ToastModule } from "primeng/toast";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: 'app-order-add',
@@ -35,7 +37,9 @@ import { ActivatedRoute, Router } from "@angular/router";
     InputIconModule,
     Button,
     InputNumberModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './order-add.component.html',
   styleUrl: './order-add.component.scss'
 })
@@ -61,6 +65,7 @@ export class OrderAddComponent implements OnInit{
     private cdr: ChangeDetectorRef,
     private orderService:OrderService,
     private itemsService:ItemsService,
+    private messageService: MessageService,
     private customerService:CustomerService
   ) {
   }
@@ -132,6 +137,7 @@ export class OrderAddComponent implements OnInit{
       complete:(()=>{
         this.clearSelected();
         this.customer = undefined;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Order created successfully' });
         this.router.navigate(['/home/order'],{relativeTo:this.route}).finally();
       })
     });

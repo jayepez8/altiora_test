@@ -8,7 +8,8 @@ import { Button } from "primeng/button";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { CustomerAddEditComponent } from "../customer-add-edit/customer-add-edit.component";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { ConfirmationService } from "primeng/api";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { ToastModule } from "primeng/toast";
 
 @Component({
   selector: 'app-customer-list',
@@ -18,9 +19,10 @@ import { ConfirmationService } from "primeng/api";
     CardModule,
     TableModule,
     Button,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ToastModule
   ],
-  providers: [DialogService,ConfirmationService],
+  providers: [DialogService,ConfirmationService,MessageService],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
@@ -31,6 +33,7 @@ export class CustomerListComponent implements OnInit, OnDestroy{
 
   constructor(
     public dialogService: DialogService,
+    private messageService: MessageService,
     private customerService:CustomerService,
     private confirmationService: ConfirmationService
   ) {
@@ -56,6 +59,7 @@ export class CustomerListComponent implements OnInit, OnDestroy{
     this.ref = this.dialogService.open(CustomerAddEditComponent, {header: 'Create new customer'});
     this.ref.onClose.subscribe((customer:Customer)=>{
       if(customer){
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Customer created successfully' });
         this.getAll();
       }
     });
@@ -65,6 +69,7 @@ export class CustomerListComponent implements OnInit, OnDestroy{
     this.ref = this.dialogService.open(CustomerAddEditComponent, {header: 'Edit customer',data:customer});
     this.ref.onClose.subscribe((customer:Customer)=>{
       if(customer){
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Customer updated successfully' });
         this.getAll();
       }
     });
@@ -84,7 +89,7 @@ export class CustomerListComponent implements OnInit, OnDestroy{
         this.customerService.delete(customer.identification).subscribe({
           complete:(()=>{
             this.getAll();
-            //this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Customer deleted' });
+            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Customer deleted' });
           })
         })
       },

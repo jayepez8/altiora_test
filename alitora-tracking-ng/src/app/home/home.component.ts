@@ -5,6 +5,7 @@ import { MenuItem } from "primeng/api";
 import { AvatarModule } from "primeng/avatar";
 import { Router } from "@angular/router";
 import { DividerModule } from "primeng/divider";
+import { LoadingComponent } from "../shared/components/loading/loading.component";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { DividerModule } from "primeng/divider";
     MenubarModule,
     AvatarModule,
     DividerModule,
+    LoadingComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

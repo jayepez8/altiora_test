@@ -8,6 +8,8 @@ import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { OrderDetailsComponent } from "../order-details/order-details.component";
+import { ToastModule } from "primeng/toast";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: 'app-order-list',
@@ -16,9 +18,10 @@ import { OrderDetailsComponent } from "../order-details/order-details.component"
     CommonModule,
     CardModule,
     TableModule,
-    Button
+    Button,
+    ToastModule
   ],
-  providers: [DialogService],
+  providers: [DialogService,MessageService],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss'
 })
