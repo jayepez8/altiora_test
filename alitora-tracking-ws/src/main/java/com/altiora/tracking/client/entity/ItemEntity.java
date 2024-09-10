@@ -34,6 +34,9 @@ public class ItemEntity {
     @Column(name = "CREATE_DATE",nullable = false)
     private LocalDateTime createDate;
 
+    @Column(name = "STOCK")
+    private int stock;
+
     @PrePersist
     public void prePersist() {
         this.createDate = LocalDateTime.now();

@@ -34,7 +34,8 @@ export class ItemAddComponent implements OnInit{
   item: Item={
     itemCode:'',
     name:'',
-    unitPrice:0
+    unitPrice:0,
+    stock:0
   };
 
   constructor(
@@ -47,6 +48,7 @@ export class ItemAddComponent implements OnInit{
       itemCode: new FormControl({ value: this.item.itemCode, disabled: true }, [Validators.required]),
       name: new FormControl(this.item.name, [Validators.required]),
       unitPrice: new FormControl(this.item.unitPrice, [Validators.required,this.nonZeroValidator()]),
+      stock: new FormControl(this.item.stock, [Validators.required,this.nonZeroValidator()]),
     });
   }
 

@@ -67,12 +67,23 @@ public class OrderService implements IOrderService {
                 OrderItemEntity orderItem = this.orderItemMapper.toOrderItem(orderItemVo);
                 orderItem.setOrder(orderSave);
                 ItemEntity item = this.iItemService.findItemEntityByItemCode(orderItemVo.getItemCode());
+
+                if(item.getStock() < orderItem.getQuantity()){
+                    throw new NotFoundException("Not enough stock");
+                }else {
+                    item.setStock(item.getStock()-orderItem.getQuantity());
+                    this.iItemService.reduceStock(item);
+                }
                 orderItem.setItem(item);
                 orderItems.add(orderItem);
             }
             this.orderItemRepository.saveAll(orderItems);
             return this.orderMapper.toOrderVo(orderSave);
-        } catch (Exception e) {
+        }
+        catch (NotFoundException e){
+            throw new NotFoundException(e.getMessage());
+        }
+        catch (Exception e) {
             throw new PersistException("A problem occurred, the order could not be saved");
         }
     }

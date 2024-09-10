@@ -79,4 +79,9 @@ public class ItemService implements IItemService {
         return this.itemRepository.findByItemCode(itemCode)
                 .orElseThrow(() -> new NotFoundException("No customer found with the identification " + itemCode));
     }
+
+    @Override
+    public void reduceStock(ItemEntity item) {
+        this.itemRepository.save(item);
+    }
 }

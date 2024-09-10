@@ -14,6 +14,7 @@
         <th>Item Code</th>
         <th>Name</th>
         <th>Unit Price</th>
+        <th>Stock</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
@@ -21,6 +22,7 @@
         <td>{{item.itemCode}}</td>
         <td>{{item.name}}</td>
         <td>{{item.unitPrice |currency}}</td>
+        <td>{{item.stock}}</td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">

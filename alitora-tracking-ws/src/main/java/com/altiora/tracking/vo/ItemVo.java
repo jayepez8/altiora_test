@@ -23,4 +23,6 @@ public class ItemVo {
     private String name;
     @NotNull(message = "Unit price is required")
     private double unitPrice;
+    @NotNull(message = "Stock is required")
+    private int stock;
 }

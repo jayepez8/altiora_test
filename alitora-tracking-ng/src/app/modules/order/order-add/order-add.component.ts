@@ -119,9 +119,11 @@ export class OrderAddComponent implements OnInit{
 
   saveOrder() {
     if(!this.customer){
+      this.messageService.add({severity: 'warn', summary: 'Warnign', detail: 'Select client'});
       return;
     }
     if(this.itemsSelected.length === 0){
+      this.messageService.add({severity: 'warn', summary: 'Warning', detail: 'Select items'});
       return;
     }
     this.order.identification = this.customer.identification;
@@ -137,8 +139,11 @@ export class OrderAddComponent implements OnInit{
       complete:(()=>{
         this.clearSelected();
         this.customer = undefined;
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Order created successfully' });
-        this.router.navigate(['/home/order'],{relativeTo:this.route}).finally();
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Order created successfully'});
+        this.router.navigate(['/home/order'], {relativeTo: this.route}).finally();
+      }),
+      error:(err =>{
+        this.messageService.add({severity: 'error', summary: 'Error', detail: err.error.message});
       })
     });
   }

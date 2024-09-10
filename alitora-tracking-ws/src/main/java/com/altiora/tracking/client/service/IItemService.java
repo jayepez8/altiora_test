@@ -48,4 +48,6 @@ public interface IItemService {
      * @return ItemVo
      */
     ItemEntity findItemEntityByItemCode(String itemCode);
+
+    void reduceStock(ItemEntity item);
 }

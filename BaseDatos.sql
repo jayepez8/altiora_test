@@ -27,7 +27,8 @@ CREATE TABLE items (
     item_code VARCHAR(10) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     create_date DATE NOT NULL,
-    unit_price DECIMAL(10, 2) NOT NULL
+    unit_price DECIMAL(10, 2) NOT NULL,
+    stock INT
 );
 
 CREATE TABLE order_items (
@@ -195,127 +196,148 @@ INSERT INTO
         item_code,
         name,
         create_date,
-        unit_price
+        unit_price,
+        stock
     )
 VALUES (
         'ITEM0001',
         'Laptop',
         '2024-09-01',
-        1200.00
+        1200.00,
+        20
     ),
     (
         'ITEM0002',
         'Smartphone',
         '2024-09-02',
-        800.00
+        800.00,
+        4
     ),
     (
         'ITEM0003',
         'Tablet',
         '2024-09-03',
-        600.00
+        600.00,
+        8
     ),
     (
         'ITEM0004',
         'Monitor',
         '2024-09-04',
-        300.00
+        300.00,
+        9
     ),
     (
         'ITEM0005',
         'Keyboard',
         '2024-09-05',
-        50.00
+        50.00,
+        10
     ),
     (
         'ITEM0006',
         'Mouse',
         '2024-09-06',
-        25.00
+        25.00,
+        50
     ),
     (
         'ITEM0007',
         'Printer',
         '2024-09-07',
-        150.00
+        150.00,
+        50
     ),
     (
         'ITEM0008',
         'Desk Chair',
         '2024-09-08',
-        200.00
+        200.00,
+        65
     ),
     (
         'ITEM0009',
         'Webcam',
         '2024-09-01',
-        75.00
+        75.00,
+        42
     ),
     (
         'ITEM0010',
         'Headphones',
         '2024-09-01',
-        100.00
+        100.00,
+        32
     ),
     (
         'ITEM0011',
         'Speaker',
         '2024-09-02',
-        180.00
+        180.00,
+        25
     ),
     (
         'ITEM0012',
         'External Hard Drive',
         '2024-09-04',
-        90.00
+        90.00,
+        36
     ),
     (
         'ITEM0013',
         'USB Hub',
         '2024-09-05',
-        40.00
+        40.00,
+        22
     ),
     (
         'ITEM0014',
         'Microphone',
         '2024-09-06',
-        130.00
+        130.00,
+        4
     ),
     (
         'ITEM0015',
         'Graphic Tablet',
         '2024-09-07',
-        250.00
+        250.00,
+        99
     ),
     (
         'ITEM0016',
         'Smart Watch',
         '2024-09-02',
-        400.00
+        400.00,
+        33
     ),
     (
         'ITEM0017',
         'Gaming Chair',
         '2024-09-03',
-        350.00
+        350.00,
+        64
     ),
     (
         'ITEM0018',
         'Projector',
         '2024-09-04',
-        700.00
+        700.00,
+        76
     ),
     (
         'ITEM0019',
         'Router',
         '2024-09-05',
-        90.00
+        90.00,
+        32
     ),
     (
         'ITEM0020',
         'Fitness Tracker',
         '2024-09-06',
-        120.00
+        120.00,
+        15
     );
 
 INSERT INTO

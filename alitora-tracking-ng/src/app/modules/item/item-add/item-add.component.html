@@ -26,5 +26,14 @@
       locale="en-US"
       mode="currency"/>
   </div>
+  <div class="flex flex-column gap-2">
+    <label for="stock">Stock*</label>
+    <p-inputNumber
+      formControlName="stock"
+      id="stock"
+      [min]="0"
+      inputId="stock"
+    />
+  </div>
   <p-button [disabled]="form.invalid" class="align-self-center" label="Submit" type="submit"/>
 </form>
